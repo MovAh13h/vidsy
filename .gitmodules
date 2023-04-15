@@ -1,9 +1,0 @@
-[submodule "vidsy-service-definitions"]
-	path = vidsy-service-definitions
-	url = git@github.com:MovAh13h/vidsy-service-definitions.git
-[submodule "vidsy-q"]
-	path = vidsy-q
-	url = git@github.com:MovAh13h/vidsy-q.git
-[submodule "vidsy-aws"]
-	path = vidsy-aws
-	url = git@github.com:MovAh13h/vidsy-aws.git

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package jobs;
+
+option go_package = "jobservice/";
+
+import "request.proto";
+import "response.proto";
+
+service JobService {
+	rpc QueueJob(request.Request) returns (response.Response) {}
+}

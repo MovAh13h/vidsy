@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "common.proto";
+
+package response;
+
+option go_package = "response/";
+
+message Response {
+	string dest_path = 1;
+	repeated common.VideoResolution failed_conv = 2;
+}

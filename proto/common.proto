@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "common/";
+
+enum VideoOutputFormat {
+	MPEG_DASH = 0;
+	HLS = 1;
+}
+
+enum VideoResolution {
+	P144 = 0;
+	P240 = 1;
+	P360 = 2;
+	P480 = 3;
+	P720 = 4;
+	P1080 = 5; // HD
+	P1440 = 6; // Ultra HD
+	P2160 = 7; // 4k
+}
