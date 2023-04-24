@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common;
 
-option go_package = "common/";
+option go_package = "./pb";
 
 enum VideoOutputFormat {
 	MPEG_DASH = 0;

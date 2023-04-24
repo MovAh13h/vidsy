@@ -2,6 +2,7 @@ package sqs
 
 import (
 	"context"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
@@ -21,13 +22,22 @@ func (c *AwsSqsClient) CreateQueue(ctx context.Context, input *sqs.CreateQueueIn
 	return c.client.CreateQueue(ctx, input)
 }
 
-func (c *AwsSqsClient) CreateQueueIfNotExist(ctx context.Context, cr_input *sqs.CreateQueueInput, get_input *sqs.GetQueueAttributesInput) (*sqs.CreateQueueOutput, error) {
-	_, err := c.client.GetQueueAttributes(ctx, get_input)
+func (c *AwsSqsClient) CreateQueueIfNotExist(ctx context.Context, cr_input *sqs.CreateQueueInput, get_input *sqs.ListQueuesInput) (*sqs.CreateQueueOutput, error) {
+	o, err := c.client.ListQueues(ctx, get_input)
 	if err != nil {
-		return c.CreateQueue(ctx, cr_input)
+		return nil, err
 	}
 
-	return nil, err
+	for _, url := range o.QueueUrls {
+		if strings.Contains(url, *cr_input.QueueName) {
+			return &sqs.CreateQueueOutput{
+				QueueUrl: &url,
+			}, nil
+		}
+	}
+
+	
+	return c.CreateQueue(ctx, cr_input)
 }
 
 func (c *AwsSqsClient) DeleteQueue(ctx context.Context, input *sqs.DeleteQueueInput) (*sqs.DeleteQueueOutput, error) {

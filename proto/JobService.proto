@@ -2,11 +2,10 @@ syntax = "proto3";
 
 package jobs;
 
-option go_package = "jobservice/";
+import "job.proto";
 
-import "request.proto";
-import "response.proto";
+option go_package = "./pb";
 
 service JobService {
-	rpc QueueJob(request.Request) returns (response.Response) {}
+	rpc QueueJob(job.JobRequest) returns (job.JobResponse) {}
 }
