@@ -88,8 +88,6 @@ func (c *Consumer) Start() {
 			go c.process(&qj, &wg)	
 		}
 	}
-
-	wg.Wait()
 }
 
 func (c *Consumer) process(qj *common.QueueJob, wg *sync.WaitGroup) {
